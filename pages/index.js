@@ -1,6 +1,12 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
+
+//import Link from "next/link";
+
+const WWSS_TOKEN = "tt-61e807";
+const WWSS_ACCOUNT = "westwingstudio.surveysparrow.com";
+const WWSS_SURVEY_NAME = "dein-eigenes-projekt";
 
 export default function Home() {
   return (
@@ -12,44 +18,39 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <style jsx>{`
+          .section {
+            background-color: aquamarine;
+            padding: 50px 100px;
+            min-height: 300px;
+          }
+        `}</style>
+        <div className="section">Section 1</div>
+        <div className="section">Section 2</div>
+        <div className="section">Section 3</div>
+        <div id="sparrow-block" style={{height: '100vh'}}>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.SS_WIDGET_TOKEN = ${JSON.stringify(WWSS_TOKEN)};
+                window.SS_ACCOUNT = ${JSON.stringify(WWSS_ACCOUNT)};
+                window.SS_SURVEY_NAME = ${JSON.stringify(WWSS_SURVEY_NAME)};
+                function Sparrow(){Sparrow.update.apply(Sparrow,arguments)}
+                Sparrow.args=[];
+                Sparrow.update=function(){for(var r=arguments.length,a=new Array(r),p=0;p<r;p++)a[p]=arguments[p];Sparrow.args.push(a)};
+                window.SparrowLauncher=Sparrow;`,
+            }}
+          />
+          <script
+            type="text/javascript"
+            id="ss-widget"
+            defer
+            src={`//${WWSS_ACCOUNT}/widget/${WWSS_TOKEN}`}
+          />
         </div>
+        <div className="section">Section 4</div>
+        <div className="section">Section 5</div>
+        <div className="section">Section 5</div>
       </main>
 
       <footer className={styles.footer}>
@@ -58,12 +59,12 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }
